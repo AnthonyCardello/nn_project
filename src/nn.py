@@ -21,7 +21,7 @@ def forward(nn_start: list[list[np.ndarray]], X: np.ndarray) -> tuple[list[np.nd
     Z: list[np.ndarray] = []
     i = 0
     for layer in nn_start:
-        if(i < 1): Z.append(X.dot(layer[0])+ layer[1])
+        if(i < 1): Z.append(X.dot(layer[0])+ layer[1]) # layer[1] is the bias
         else: Z.append(Z[i-1].dot(layer[0])+ layer[1])
         if i != (len(nn_start) - 1):
             A.append(relu(Z[i]))
@@ -32,9 +32,10 @@ def forward(nn_start: list[list[np.ndarray]], X: np.ndarray) -> tuple[list[np.nd
 
 # def cost()  gonna use some binary cross entrophy kinky function
 
+def loss(A: np.ndarray, X: np.ndarray, Y: np.ndarray) -> np.ndarray:
+    return -1/(Y.shape[0])* np.sum(Y * (np.log(A))) + ((1-Y)*np.log((1-A)))
 
 
-# def forward(model: list[np.ndarray],)
 
 
 
